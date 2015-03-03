@@ -14,43 +14,12 @@
  */
 
 #import "AZIOSClientContextTests.h"
-#import "AWSMobileAnalyticsIOSClientContext.h"
-#import <UIKit/UIKit.h>
-#import "AWSMobileAnalyticsIOSSystem.h"
-#import "AWSMobileAnalyticsStringUtils.h"
-
-@interface AWSMobileAnalyticsIOSClientContext(Testing)
-
-- (NSString *) deviceModelVersionCode;
-
-@end
 
 @implementation AZIOSClientContextTests
 
 - (void)test_contextAttributesNoCustomAttributes
 {
-    AWSMobileAnalyticsIOSClientContext *clientContext = [AWSMobileAnalyticsIOSClientContext defaultClientContextWithAppId:@"appId"];
-    
-    //App details
-    assertThat(clientContext.appId, is(equalTo(@"appId")));
-    
-    assertThat(clientContext.appPackageName, is(equalTo(@"Unknown")));
-    assertThat(clientContext.appVersion, is(equalTo(@"Unknown")));
-    assertThat(clientContext.appPackageName, is(equalTo(@"Unknown")));
-    assertThat(clientContext.appName, is(equalTo(@"Unknown")));
-    
-    //Device details
-    UIDevice* currentDevice = [UIDevice currentDevice];
-    assertThat(clientContext.deviceManufacturer, is(equalTo(@"apple")));
-    XCTAssertTrue([clientContext.deviceModel isEqualToString:@"iPhone Simulator"] ||
-                  [clientContext.deviceModel isEqualToString:@"iPad Simulator"]);
-    assertThat(clientContext.devicePlatform, is(equalTo(@"iPhone OS")));
-    assertThat(clientContext.deviceLocale, is(equalTo([[NSLocale autoupdatingCurrentLocale] localeIdentifier])));
-    assertThat(clientContext.deviceModelVersion, is(equalTo([clientContext deviceModelVersionCode])));
-    assertThat(clientContext.devicePlatformVersion, is(equalTo([currentDevice systemVersion])));
-    
-    //Custom attributes
-    assertThat(clientContext.customAttributes, is(nilValue()));
+
 }
 
 - (void)test_contextAttributesWithCustomAttributes
